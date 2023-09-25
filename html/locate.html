@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locate</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <!-- Leaflet Control Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css"
+    integrity="sha512-ppzW9J9w/rY1fj77e7nEM5ie5nS4WyqS/RQW+FwZGzOx5dJkfnKTiP6g3w3YDFe/dg3iXQQZroTxf6lgeVmb0LA=="
+    crossorigin=""/>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <!-- Leaflet Control Geocoder JavaScript -->
+    <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"
+    integrity="sha512-n/D6zqOsMlGv3WzD/AaJ/dYzBRWvIrI9rTBEIGk3jNNdoEn/GGXh21X5qdz0N2jKb4E+fg3CCBt8RcD3f5THy6Q=="
+    crossorigin=""></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 80vh; /* Reduce the map height to make room for the search bar */
+        }
+
+        #search-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #search-input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+       
+
+nav ul {
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #00cc66;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo-removebg.png" alt="Logo">
+            </div>
+            <div class="location-search">
+                <input type="text" placeholder="Enter location">
+                <button type="submit">Search</button>
+            </div>
+            <ul class="menu">
+                <li><a href="index.html" target="_self">Home</a></li>
+                <li><a href="learn.html" target="_self">Learn</a></li>
+                <li><a href="locate.html" target="_self">Locator</a></li>
+                <li><a href="track.html" target="_self">Track</a></li>
+                <li><a href="about.html" target="_self">Contact Us</a></li>
+                <li><a href="#" target="_self">Login</a></li>
+                <li><a href="../Dashboard/index.html" target="_self">Dashboard</a></li>
+            </ul>
+
+        </nav>
+    </header>
+    
+    
+    <div id="search-container">
+        <input id="search-input" type="text" placeholder="Enter a location">
+        <button id="search-button">Search</button>
+    </div>
+<div id="map"></div>
+    <script>
+        var map;
+        var marker;
+        var eWasteMarkers = L.layerGroup();
+
+        // Function to initialize the map with a specified center
+        function initializeMap(center) {
+            map = L.map('map', {
+                center: center,
+                zoom: 12 // Adjust the zoom level as needed
+            });
+
+            var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            marker = L.marker(center).addTo(map);
+
+            var Basemaps = {
+                "OSM": osm
+            };
+
+            var Overlaymaps = {
+                "Marker": marker,
+                "E-Waste Facilities": eWasteMarkers
+            };
+
+            L.control.layers(Basemaps, Overlaymaps).addTo(map);
+        }
+
+        // Function to add e-waste collection facility markers to the map
+        function addEWasteMarkers(data) {
+            eWasteMarkers.clearLayers();
+            data.forEach(function (facility) {
+                var eWasteMarker = L.marker([facility.lat, facility.lon])
+                    .bindPopup(facility.name)
+                    .addTo(eWasteMarkers);
+            });
+        }
+
+        // Function to handle the search button click event
+        document.getElementById('search-button').addEventListener('click', function () {
+            var location = document.getElementById('search-input').value;
+
+            // Use a geocoding service to get coordinates for the entered location
+            // For example, you can use Nominatim (OSM's geocoding service)
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        var resultLocation = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+
+                        // Center the map on the selected location
+                        map.setView(resultLocation, 12); // Adjust the zoom level as needed
+
+                        // Update the marker position
+                        marker.setLatLng(resultLocation);
+
+                        // Fetch nearby e-waste collection facilities within the district
+                        fetch(`https://example.com/api/e-waste-facilities?lat=${resultLocation[0]}&lon=${resultLocation[1]}`)
+                            .then(response => response.json())
+                            .then(eWasteFacilities => {
+                                // Process and display nearby e-waste collection facilities as needed
+                                addEWasteMarkers(eWasteFacilities);
+                            });
+                    } else {
+                        alert('Location not found.');
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+
+        // Initialize the map with Bhopal as the default location
+        initializeMap([23.2599, 77.4126]); // Bhopal coordinates
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, h3, p, ul, li, nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("e\ waste\ img.avif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0; /* Remove default body margin */
+    display: flex; /* Use flex layout for main content area and footer */
+    flex-direction: column; /* Stack main content and footer vertically */
+    min-height: 100vh; /* Ensure the page fills at least the viewport height */
+    width: 500px 254px;
+}
+
+header {
+    background-color: #0a3113;
+    color: #fff;
+    padding: 10px 0;
+    
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.location-search {
+    display: flex;
+}
+
+.location-search input {
+    padding: 5px;
+    border: none;
+    width: 200px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    
+}
+
+.location-search button {
+    background-color: #fff;
+    border: none;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    cursor: pointer;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+    
+}
+
+.menu li {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.menu li:last-child {
+    margin-right: 0;
+    
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.main {
+    text-align: center;
+    position: relative;
+    flex-grow: 1; /* Allow the main content area to grow to fill available space */
+}
+
+.search-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-content {
+    color: white;
+}

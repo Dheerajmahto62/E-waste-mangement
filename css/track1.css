@@ -1,0 +1,219 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, p, ul, li, span {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #0a3113;
+    color: #fff;
+    padding: 10px 0;
+    
+    
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.location-search {
+    display: flex;
+}
+
+.location-search input {
+    padding: 5px;
+    border: none;
+    width: 200px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    
+}
+
+.location-search button {
+    background-color: #fff;
+    border: none;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    cursor: pointer;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+    
+}
+
+.menu li {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.menu li:last-child {
+    margin-right: 0;
+    
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+.tracking-details {
+    text-align: left;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.tracking-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.tracking-details p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.tracking-timeline {
+    text-align: left;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.tracking-timeline h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.timeline {
+    position: relative;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.status-bar {
+    width: 0;
+    height: 100%;
+    background-color: #28a745; /* Initial color of the status bar */
+    transition: width 0.5s ease-in-out; /* Animation transition */
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+}
+
+.dot.order-placed {
+    background-color: #28a745;
+}
+
+.dot.dispatched {
+    background-color: #ffc107;
+}
+
+.dot.in-transit {
+    background-color: #007bff;
+}
+
+.dot.delivered {
+    background-color: #28a745;
+}
+
+button#track-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#track-button:hover {
+    background-color: #0056b3;
+}
+
+/* Overlay styles for the full-screen alert */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 9999; /* Ensure it's above other elements */
+    justify-content: center;
+    align-items: center;
+}
+
+#alert-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+    animation: bounce 1s infinite; /* Add a bounce animation */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}

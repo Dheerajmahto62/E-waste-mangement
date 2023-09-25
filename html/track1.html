@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Tracking</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/track1.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">Locate</a></li>
+                <li><a href="track.html">Track</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="about.html">About Us</a></li> <!-- Added "About Us" section to the navigation -->
+            </ul>
+        </nav>
+    </header>
+    <header>
+        <h1>Product Tracking</h1>
+    </header>
+    <main>
+        <div class="tracking-details">
+            <h2>Product Tracking Details</h2>
+            <p><strong>Tracking Number:</strong> ABC123456789</p>
+            <p><strong>Status:</strong> <span id="status">Order Placed</span></p>
+        </div>
+        <div class="tracking-timeline">
+            <h2>Status Timeline</h2>
+            <div class="timeline">
+                <div class="status-bar"></div>
+                <div class="dot order-placed"></div>
+                <div class="dot dispatched"></div>
+                <div class="dot in-transit"></div>
+                <div class="dot delivered"></div>
+            </div>
+        </div>
+        <button id="track-button">Track</button>
+        <div id="overlay" class="hidden">
+            <div id="alert-box">
+                <div id="emoji">🎉</div>
+                <h2 id="congrats-message">Congratulations!</h2>
+                <p id="feedback-message">You are making a positive impact on Earth. <a href="#" id="proud-link">I am proud of me</a></p>
+                <!-- Feedback form -->
+                <div id="feedback-form" class="hidden">
+                    <h3>Provide Feedback</h3>
+                    <form>
+                        <textarea id="feedback-text" rows="4" placeholder="Enter your feedback"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Product Tracking</p>
+    </footer>
+    <script src="track1.js"></script>
+</body>
+</html>
